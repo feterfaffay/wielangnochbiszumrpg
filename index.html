@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>It's RPG Time!</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Bangers');
+
+      body {
+        margin: 0px;
+        background-color: #343434;
+      }
+
+      .timer-wrapper {
+        margin: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 250px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: 'Bangers';
+        color: white;
+      }
+
+      #timer-header {
+        font-size: 36px;
+      }
+
+      #timer {
+        font-size: 96px;
+      }
+
+      #timer-footer {
+        font-size: 64px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="timer-wrapper">
+      <span id="timer-header">IN JUST</span>
+      <span id="timer"></span>
+      <span id="timer-footer">IT'S RPG TIME!</span>
+      <span>(hopefully)</span>
+    </div>
+    <script>
+      const deadline = 1536357600000;
+      const timer = document.getElementById('timer');
+
+      function getTimeLeft() {
+        return (deadline - new Date().getTime());
+      }
+
+      function convertTimeToString(t) {
+        let time = '';
+
+        if (t % 86400000 >= 1) {
+          var c = Math.floor(t / 86400000);
+          time += `${c} days`;
+          t -= c * 86400000;
+        }
+
+        if (t % 3600000 >= 1) {
+          var c = Math.floor(t / 3600000);
+          time += ` ${c} hours`;
+          t -= c * 3600000;
+        }
+
+        if (t % 60000 >= 1) {
+          var c = Math.floor(t / 60000);
+          time += ` ${c} minutes`;
+          t -= c * 60000;
+        }
+
+        if (t % 1000 >= 1) {
+          var c = Math.floor(t / 1000);
+          time += ` ${c} seconds`;
+          t -= c * 1000;
+        }
+
+        return time;
+      }
+
+      setInterval(function () {
+        timer.innerHTML = convertTimeToString(getTimeLeft());
+      }, 1000);
+    </script>
+  </body>
+</html>
